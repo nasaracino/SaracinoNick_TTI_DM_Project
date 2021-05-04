@@ -1,0 +1,54 @@
+﻿<Window x:Class="SaracinoNick_TTI_DM_Project.Hoofdscherm_Student"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SaracinoNick_TTI_DM_Project"
+        mc:Ignorable="d"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Hoofdscherm_Student" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" TextAlignment="Center" Margin="5"
+    Style="{StaticResource MaterialDesignHeadline4TextBlock}">
+    Welkom bij Udemy
+        </TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"
+    Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+  Ingeschreven Cursussen
+        </TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"
+    Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+  Ik wil me inschrijven voor een cursus
+        </TextBlock>
+        <DataGrid x:Name="dataIngeschrevenCursussen" Grid.Row="2" Grid.Column="0" Margin="5" AutoGenerateColumns="False" IsReadOnly="True"></DataGrid>
+        <Button x:Name="btnInschrijvenCursus" Grid.Row="2" Grid.Column="1" Margin="5" Content="Klik hier" Width="200" Click="btnInschrijvenCursus_Click"/>
+        <Button x:Name="btnCursusBekijken" Grid.Row="3" Grid.Column="0" Margin="5" Content="Cursus Bekijken" Width="200"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" Margin="0 20 0 0"
+    Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+  Betalingsmethode instellen
+        </TextBlock>
+        <Label x:Name="lblBetalingsmethode" Content="Betalingsmethode:" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ComboBox x:Name="cmbBetalingsmethode" Grid.Column="1" Grid.Row="5" Margin="5" VerticalAlignment="Top"/>
+        <Button x:Name="btnInstellen" Grid.Column="0" Grid.Row="6" Margin="5" Content="Betalingsmethode instellen" Width="225"/>
+    </Grid>
+</Window>

@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="UdemyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categorie" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cursus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="omschrijving" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="categorieId" Type="int" Nullable="false" />
+          <Property Name="prijs" Type="float" Nullable="false" />
+          <Property Name="metKorting" Type="bit" Nullable="false" />
+          <Property Name="kortingPercentage" Type="int" Nullable="false" />
+          <Property Name="instructeurId" Type="int" Nullable="false" />
+          <Property Name="aantalResources" Type="int" Nullable="false" />
+          <Property Name="certificaat" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CursusGebruiker">
+          <Key>
+            <PropertyRef Name="gebruikerId" />
+            <PropertyRef Name="cursusId" />
+          </Key>
+          <Property Name="gebruikerId" Type="int" Nullable="false" />
+          <Property Name="cursusId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CursusHoofdstuk">
+          <Key>
+            <PropertyRef Name="hoofdstukId" />
+            <PropertyRef Name="cursusId" />
+          </Key>
+          <Property Name="hoofdstukId" Type="int" Nullable="false" />
+          <Property Name="cursusId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gebruiker">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="achternaam" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="voornaam" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="wachtwoord" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="betalingsmethode" Type="varchar" MaxLength="100" />
+          <Property Name="geboortedatum" Type="date" Nullable="false" />
+          <Property Name="geslacht" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hoofdstuk">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="omschrijving" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="tijdsduurInMinuten" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Instructeur">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="achternaam" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="voornaam" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="wachtwoord" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lezing">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="omschrijving" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="tijdsduurInMinuten" Type="int" Nullable="false" />
+          <Property Name="hoofdstukId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Categorie_Cursus">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+          <End Role="Cursus" Type="Self.Cursus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cursus">
+              <PropertyRef Name="categorieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cursus_CursusGebruiker">
+          <End Role="Cursus" Type="Self.Cursus" Multiplicity="1" />
+          <End Role="CursusGebruiker" Type="Self.CursusGebruiker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cursus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CursusGebruiker">
+              <PropertyRef Name="cursusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cursus_CursusHoofdstuk">
+          <End Role="Cursus" Type="Self.Cursus" Multiplicity="1" />
+          <End Role="CursusHoofdstuk" Type="Self.CursusHoofdstuk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cursus">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CursusHoofdstuk">
+              <PropertyRef Name="cursusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gebruiker_CursusGebruiker">
+          <End Role="Gebruiker" Type="Self.Gebruiker" Multiplicity="1" />
+          <End Role="CursusGebruiker" Type="Self.CursusGebruiker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gebruiker">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CursusGebruiker">
+              <PropertyRef Name="gebruikerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hoofdstuk_CursusHoofdstuk">
+          <End Role="Hoofdstuk" Type="Self.Hoofdstuk" Multiplicity="1" />
+          <End Role="CursusHoofdstuk" Type="Self.CursusHoofdstuk" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hoofdstuk">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CursusHoofdstuk">
+              <PropertyRef Name="hoofdstukId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hoofdstuk_Lezing">
+          <End Role="Hoofdstuk" Type="Self.Hoofdstuk" Multiplicity="1" />
+          <End Role="Lezing" Type="Self.Lezing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hoofdstuk">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Lezing">
+              <PropertyRef Name="hoofdstukId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Instructeur_Cursus">
+          <End Role="Instructeur" Type="Self.Instructeur" Multiplicity="1" />
+          <End Role="Cursus" Type="Self.Cursus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructeur">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cursus">
+              <PropertyRef Name="instructeurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UdemyModelStoreContainer">
+          <EntitySet Name="Categorie" EntityType="Self.Categorie" Schema="Udemy" store:Type="Tables" />
+          <EntitySet Name="Cursus" EntityType="Self.Cursus" Schema="Udemy" store:Type="Tables" />
+          <EntitySet Name="CursusGebruiker" EntityType="Self.CursusGebruiker" Schema="Udemy" store:Type="Tables" />
+          <EntitySet Name="CursusHoofdstuk" EntityType="Self.CursusHoofdstuk" Schema="Udemy" store:Type="Tables" />
+          <EntitySet Name="Gebruiker" EntityType="Self.Gebruiker" Schema="Udemy" store:Type="Tables" />
+          <EntitySet Name="Hoofdstuk" EntityType="Self.Hoofdstuk" Schema="Udemy" store:Type="Tables" />
+          <EntitySet Name="Instructeur" EntityType="Self.Instructeur" Schema="Udemy" store:Type="Tables" />
+          <EntitySet Name="Lezing" EntityType="Self.Lezing" Schema="Udemy" store:Type="Tables" />
+          <AssociationSet Name="FK_Categorie_Cursus" Association="Self.FK_Categorie_Cursus">
+            <End Role="Categorie" EntitySet="Categorie" />
+            <End Role="Cursus" EntitySet="Cursus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cursus_CursusGebruiker" Association="Self.FK_Cursus_CursusGebruiker">
+            <End Role="Cursus" EntitySet="Cursus" />
+            <End Role="CursusGebruiker" EntitySet="CursusGebruiker" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cursus_CursusHoofdstuk" Association="Self.FK_Cursus_CursusHoofdstuk">
+            <End Role="Cursus" EntitySet="Cursus" />
+            <End Role="CursusHoofdstuk" EntitySet="CursusHoofdstuk" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gebruiker_CursusGebruiker" Association="Self.FK_Gebruiker_CursusGebruiker">
+            <End Role="Gebruiker" EntitySet="Gebruiker" />
+            <End Role="CursusGebruiker" EntitySet="CursusGebruiker" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hoofdstuk_CursusHoofdstuk" Association="Self.FK_Hoofdstuk_CursusHoofdstuk">
+            <End Role="Hoofdstuk" EntitySet="Hoofdstuk" />
+            <End Role="CursusHoofdstuk" EntitySet="CursusHoofdstuk" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hoofdstuk_Lezing" Association="Self.FK_Hoofdstuk_Lezing">
+            <End Role="Hoofdstuk" EntitySet="Hoofdstuk" />
+            <End Role="Lezing" EntitySet="Lezing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Instructeur_Cursus" Association="Self.FK_Instructeur_Cursus">
+            <End Role="Instructeur" EntitySet="Instructeur" />
+            <End Role="Cursus" EntitySet="Cursus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UdemyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Categorie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categorie1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cursus" Relationship="Self.FK_Categorie_Cursus" FromRole="Categorie" ToRole="Cursus" />
+        </EntityType>
+        <EntityType Name="Cursus">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="omschrijving" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="categorieId" Type="Int32" Nullable="false" />
+          <Property Name="prijs" Type="Double" Nullable="false" />
+          <Property Name="metKorting" Type="Boolean" Nullable="false" />
+          <Property Name="kortingPercentage" Type="Int32" Nullable="false" />
+          <Property Name="instructeurId" Type="Int32" Nullable="false" />
+          <Property Name="aantalResources" Type="Int32" Nullable="false" />
+          <Property Name="certificaat" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Categorie" Relationship="Self.FK_Categorie_Cursus" FromRole="Cursus" ToRole="Categorie" />
+          <NavigationProperty Name="Instructeur" Relationship="Self.FK_Instructeur_Cursus" FromRole="Cursus" ToRole="Instructeur" />
+          <NavigationProperty Name="Gebruikers" Relationship="Self.CursusGebruiker" FromRole="Cursus" ToRole="Gebruiker" />
+          <NavigationProperty Name="Hoofdstuks" Relationship="Self.CursusHoofdstuk" FromRole="Cursus" ToRole="Hoofdstuk" />
+        </EntityType>
+        <EntityType Name="Gebruiker">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="achternaam" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="voornaam" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="wachtwoord" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="betalingsmethode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="geboortedatum" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="geslacht" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cursus" Relationship="Self.CursusGebruiker" FromRole="Gebruiker" ToRole="Cursus" />
+        </EntityType>
+        <EntityType Name="Hoofdstuk">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="omschrijving" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tijdsduurInMinuten" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Lezings" Relationship="Self.FK_Hoofdstuk_Lezing" FromRole="Hoofdstuk" ToRole="Lezing" />
+          <NavigationProperty Name="Cursus" Relationship="Self.CursusHoofdstuk" FromRole="Hoofdstuk" ToRole="Cursus" />
+        </EntityType>
+        <EntityType Name="Instructeur">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="achternaam" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="voornaam" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="wachtwoord" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cursus" Relationship="Self.FK_Instructeur_Cursus" FromRole="Instructeur" ToRole="Cursus" />
+        </EntityType>
+        <EntityType Name="Lezing">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="omschrijving" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tijdsduurInMinuten" Type="Int32" Nullable="false" />
+          <Property Name="hoofdstukId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Hoofdstuk" Relationship="Self.FK_Hoofdstuk_Lezing" FromRole="Lezing" ToRole="Hoofdstuk" />
+        </EntityType>
+        <Association Name="FK_Categorie_Cursus">
+          <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
+          <End Role="Cursus" Type="UdemyModel.Cursus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cursus">
+              <PropertyRef Name="categorieId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Instructeur_Cursus">
+          <End Role="Instructeur" Type="Self.Instructeur" Multiplicity="1" />
+          <End Role="Cursus" Type="UdemyModel.Cursus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Instructeur">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Cursus">
+              <PropertyRef Name="instructeurId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hoofdstuk_Lezing">
+          <End Role="Hoofdstuk" Type="Self.Hoofdstuk" Multiplicity="1" />
+          <End Role="Lezing" Type="Self.Lezing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hoofdstuk">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Lezing">
+              <PropertyRef Name="hoofdstukId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CursusGebruiker">
+          <End Role="Cursus" Type="UdemyModel.Cursus" Multiplicity="*" />
+          <End Role="Gebruiker" Type="Self.Gebruiker" Multiplicity="*" />
+        </Association>
+        <Association Name="CursusHoofdstuk">
+          <End Role="Cursus" Type="UdemyModel.Cursus" Multiplicity="*" />
+          <End Role="Hoofdstuk" Type="Self.Hoofdstuk" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="UdemyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Categorie" />
+          <EntitySet Name="Cursus1" EntityType="UdemyModel.Cursus" />
+          <EntitySet Name="Gebruikers" EntityType="Self.Gebruiker" />
+          <EntitySet Name="Hoofdstuks" EntityType="Self.Hoofdstuk" />
+          <EntitySet Name="Instructeurs" EntityType="Self.Instructeur" />
+          <EntitySet Name="Lezings" EntityType="Self.Lezing" />
+          <AssociationSet Name="FK_Categorie_Cursus" Association="Self.FK_Categorie_Cursus">
+            <End Role="Categorie" EntitySet="Categories" />
+            <End Role="Cursus" EntitySet="Cursus1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Instructeur_Cursus" Association="Self.FK_Instructeur_Cursus">
+            <End Role="Instructeur" EntitySet="Instructeurs" />
+            <End Role="Cursus" EntitySet="Cursus1" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hoofdstuk_Lezing" Association="Self.FK_Hoofdstuk_Lezing">
+            <End Role="Hoofdstuk" EntitySet="Hoofdstuks" />
+            <End Role="Lezing" EntitySet="Lezings" />
+          </AssociationSet>
+          <AssociationSet Name="CursusGebruiker" Association="Self.CursusGebruiker">
+            <End Role="Cursus" EntitySet="Cursus1" />
+            <End Role="Gebruiker" EntitySet="Gebruikers" />
+          </AssociationSet>
+          <AssociationSet Name="CursusHoofdstuk" Association="Self.CursusHoofdstuk">
+            <End Role="Cursus" EntitySet="Cursus1" />
+            <End Role="Hoofdstuk" EntitySet="Hoofdstuks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UdemyModelStoreContainer" CdmEntityContainer="UdemyEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="UdemyModel.Categorie">
+              <MappingFragment StoreEntitySet="Categorie">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="categorie1" ColumnName="categorie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cursus1">
+            <EntityTypeMapping TypeName="UdemyModel.Cursus">
+              <MappingFragment StoreEntitySet="Cursus">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="omschrijving" ColumnName="omschrijving" />
+                <ScalarProperty Name="categorieId" ColumnName="categorieId" />
+                <ScalarProperty Name="prijs" ColumnName="prijs" />
+                <ScalarProperty Name="metKorting" ColumnName="metKorting" />
+                <ScalarProperty Name="kortingPercentage" ColumnName="kortingPercentage" />
+                <ScalarProperty Name="instructeurId" ColumnName="instructeurId" />
+                <ScalarProperty Name="aantalResources" ColumnName="aantalResources" />
+                <ScalarProperty Name="certificaat" ColumnName="certificaat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Gebruikers">
+            <EntityTypeMapping TypeName="UdemyModel.Gebruiker">
+              <MappingFragment StoreEntitySet="Gebruiker">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="achternaam" ColumnName="achternaam" />
+                <ScalarProperty Name="voornaam" ColumnName="voornaam" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="wachtwoord" ColumnName="wachtwoord" />
+                <ScalarProperty Name="betalingsmethode" ColumnName="betalingsmethode" />
+                <ScalarProperty Name="geboortedatum" ColumnName="geboortedatum" />
+                <ScalarProperty Name="geslacht" ColumnName="geslacht" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hoofdstuks">
+            <EntityTypeMapping TypeName="UdemyModel.Hoofdstuk">
+              <MappingFragment StoreEntitySet="Hoofdstuk">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="omschrijving" ColumnName="omschrijving" />
+                <ScalarProperty Name="tijdsduurInMinuten" ColumnName="tijdsduurInMinuten" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Instructeurs">
+            <EntityTypeMapping TypeName="UdemyModel.Instructeur">
+              <MappingFragment StoreEntitySet="Instructeur">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="achternaam" ColumnName="achternaam" />
+                <ScalarProperty Name="voornaam" ColumnName="voornaam" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="wachtwoord" ColumnName="wachtwoord" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lezings">
+            <EntityTypeMapping TypeName="UdemyModel.Lezing">
+              <MappingFragment StoreEntitySet="Lezing">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="omschrijving" ColumnName="omschrijving" />
+                <ScalarProperty Name="tijdsduurInMinuten" ColumnName="tijdsduurInMinuten" />
+                <ScalarProperty Name="hoofdstukId" ColumnName="hoofdstukId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CursusGebruiker" TypeName="UdemyModel.CursusGebruiker" StoreEntitySet="CursusGebruiker">
+            <EndProperty Name="Cursus">
+              <ScalarProperty Name="id" ColumnName="cursusId" />
+            </EndProperty>
+            <EndProperty Name="Gebruiker">
+              <ScalarProperty Name="id" ColumnName="gebruikerId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="CursusHoofdstuk" TypeName="UdemyModel.CursusHoofdstuk" StoreEntitySet="CursusHoofdstuk">
+            <EndProperty Name="Cursus">
+              <ScalarProperty Name="id" ColumnName="cursusId" />
+            </EndProperty>
+            <EndProperty Name="Hoofdstuk">
+              <ScalarProperty Name="id" ColumnName="hoofdstukId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

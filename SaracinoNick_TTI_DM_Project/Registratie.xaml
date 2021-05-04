@@ -1,0 +1,61 @@
+﻿<Window x:Class="SaracinoNick_TTI_DM_Project.Registratie"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SaracinoNick_TTI_DM_Project"
+        mc:Ignorable="d"
+                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Registratie" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" TextAlignment="Center" Margin="5"
+    Style="{StaticResource MaterialDesignHeadline4TextBlock}">
+    Registreren
+        </TextBlock>
+        <Label x:Name="lblGebruikersnaam" Margin="5" Grid.Column="0" Grid.Row="1" Content="Gebruikersnaam" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="txtGebruikersnaam" Margin="5" Grid.Column="1" Grid.Row="1"/>
+        <Label x:Name="lblAchternaam" Margin="5" Grid.Column="0" Grid.Row="2" Content="Achternaam" HorizontalAlignment="Center"  VerticalAlignment="Bottom"/>
+        <TextBox x:Name="txtAchternaam" Margin="5" Grid.Column="1" Grid.Row="2"/>
+        <Label x:Name="lblVoornaam" Margin="5" Grid.Column="0" Grid.Row="3" Content="Voornaam" HorizontalAlignment="Center"  VerticalAlignment="Bottom"/>
+        <TextBox x:Name="txtVoornaam" Margin="5" Grid.Column="1" Grid.Row="3"/>
+        <Label x:Name="lblEmail" Margin="5" Grid.Column="0" Grid.Row="4" Content="Email" HorizontalAlignment="Center"  VerticalAlignment="Bottom"/>
+        <TextBox x:Name="txtEmail" Margin="5" Grid.Column="1" Grid.Row="4"/>
+        <Label x:Name="lblWachtwoord" Margin="5" Grid.Column="0" Grid.Row="5" Content="Wachtwoord" HorizontalAlignment="Center"  VerticalAlignment="Bottom"/>
+        <PasswordBox x:Name="txtWachtwoord" materialDesign:TextFieldAssist.HasClearButton="True" Grid.Row="5" Grid.Column="1" Margin="5"/>
+        <Label x:Name="lblHerhaal" Margin="5" Grid.Column="0" Grid.Row="6" Content="Herhaal wachtwoord" HorizontalAlignment="Center"  VerticalAlignment="Bottom"/>
+        <PasswordBox x:Name="txtHerhaal" materialDesign:TextFieldAssist.HasClearButton="True" Grid.Row="6" Grid.Column="1" Margin="5"/>
+        <Label x:Name="lblGeboortedatum" Margin="5" Grid.Column="0" Grid.Row="7" Content="Geboortedatum" HorizontalAlignment="Center"  VerticalAlignment="Bottom"/>
+        <DatePicker Grid.Row="7" Grid.Column="1"></DatePicker>
+        <Label x:Name="lblGeslacht" Margin="5" Grid.Column="0" Grid.Row="8" Content="Geslacht" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <RadioButton x:Name="rbMan" GroupName="geslacht" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center">Man</RadioButton>
+        <RadioButton x:Name="rbVrouw" GroupName="geslacht" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Margin="100 0 0 0">Vrouw</RadioButton>
+        <Label x:Name="lblTypeGebruiker" Margin="5" Grid.Column="0" Grid.Row="9" Content="Type gebruiker" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+        <RadioButton x:Name="rbStudent" GroupName="typeGebruiker" Grid.Row="9" Grid.Column="1" VerticalAlignment="Center">Student</RadioButton>
+        <RadioButton x:Name="rbInstructeur" GroupName="typeGebruiker" Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" Margin="100 0 0 0">Instructeur</RadioButton>
+        <Button x:Name="btnRegistreren" Content="Registreren" Grid.ColumnSpan="2" Grid.Row="10" Margin="5" Width="150"/>
+    </Grid>
+</Window>
