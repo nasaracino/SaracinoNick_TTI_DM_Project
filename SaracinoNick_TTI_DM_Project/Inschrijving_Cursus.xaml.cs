@@ -46,7 +46,6 @@ namespace SaracinoNick_TTI_DM_Project
                     if (cursus.categorieId == 1)
                     {
                         cursussen.Add(cursus.omschrijving);
-                        lblTest.Content += "/n" + cursus.omschrijving;
                     }
                 }
                 lbCursussen.Items.Refresh();
@@ -58,7 +57,6 @@ namespace SaracinoNick_TTI_DM_Project
                     if (cursus.categorieId == 2)
                     {
                         cursussen.Add(cursus.omschrijving);
-                        lblTest.Content += "/n" + cursus.omschrijving;
 
                     }
                 }
@@ -71,7 +69,6 @@ namespace SaracinoNick_TTI_DM_Project
                     if (cursus.categorieId == 3)
                     {
                         cursussen.Add(cursus.omschrijving);
-                        lblTest.Content += "/n" + cursus.omschrijving;
                     }
                 }
                 lbCursussen.Items.Refresh();
