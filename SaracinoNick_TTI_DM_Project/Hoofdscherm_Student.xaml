@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Hoofdscherm_Student" Height="450" Width="800">
+        Title="Hoofdscherm_Student" Height="450" Width="900" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -28,27 +28,28 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" TextAlignment="Center" Margin="5"
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="3" TextAlignment="Center" Margin="5"
     Style="{StaticResource MaterialDesignHeadline4TextBlock}">
     Welkom bij Udemy
         </TextBlock>
         <TextBlock Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"
-    Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+    Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="90,0,89,0">
   Ingeschreven Cursussen
         </TextBlock>
         <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"
-    Style="{StaticResource MaterialDesignHeadline6TextBlock}">
+    Style="{StaticResource MaterialDesignHeadline6TextBlock}" Grid.ColumnSpan="2" Margin="32,0">
   Ik wil me inschrijven voor een cursus
         </TextBlock>
-        <DataGrid x:Name="dataIngeschrevenCursussen" Grid.Row="2" Grid.Column="0" Margin="5" AutoGenerateColumns="False" IsReadOnly="True"></DataGrid>
-        <Button x:Name="btnInschrijvenCursus" Grid.Row="2" Grid.Column="1" Margin="5" Content="Klik hier" Width="200" Click="btnInschrijvenCursus_Click"/>
-        <Button x:Name="btnCursusBekijken" Grid.Row="3" Grid.Column="0" Margin="5" Content="Cursus Bekijken" Width="200"/>
-        <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" Margin="0 20 0 0"
+        <ListBox x:Name="lbIngeschrevenCursussen" Grid.Row="2" Grid.Column="0" Margin="5"></ListBox>
+        <Button x:Name="btnInschrijvenCursus" Grid.Row="2" Grid.Column="2" Margin="65.411,59,98,59" Content="Klik hier" Width="200" Click="btnInschrijvenCursus_Click" />
+        <Button x:Name="btnCursusBekijken" Grid.Row="3" Grid.Column="0" Margin="98,9,98,8" Content="Cursus Bekijken" Width="200"/>
+        <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" Margin="75,20,74,0"
     Style="{StaticResource MaterialDesignHeadline6TextBlock}">
   Betalingsmethode instellen
         </TextBlock>
-        <Label x:Name="lblBetalingsmethode" Content="Betalingsmethode:" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <ComboBox x:Name="cmbBetalingsmethode" Grid.Column="1" Grid.Row="5" Margin="5" VerticalAlignment="Top"/>
-        <Button x:Name="btnInstellen" Grid.Column="0" Grid.Row="6" Margin="5" Content="Betalingsmethode instellen" Width="225"/>
+        <Label x:Name="lblBetalingsmethode" Content="Betalingsmethode:" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="140,13,140,12"/>
+        <ComboBox x:Name="cmbBetalingsmethode" Grid.Column="1" Grid.Row="5" Margin="5,5,5,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnInstellen" Grid.Column="0" Grid.Row="6" Margin="86,8,86,9" Content="Betalingsmethode instellen" Width="225"/>
+        <Label x:Name="lblTest" Grid.Column="1" Grid.Row="6" Content="TEST"/>
     </Grid>
 </Window>

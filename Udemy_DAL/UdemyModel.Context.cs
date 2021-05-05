@@ -26,7 +26,7 @@ namespace Udemy_DAL
         }
     
         public virtual DbSet<Categorie> Categories { get; set; }
-        public virtual DbSet<Cursus> Cursus1 { get; set; }
+        public virtual DbSet<Cursus> Cursus { get; set; }
         public virtual DbSet<Gebruiker> Gebruikers { get; set; }
         public virtual DbSet<Hoofdstuk> Hoofdstuks { get; set; }
         public virtual DbSet<Instructeur> Instructeurs { get; set; }

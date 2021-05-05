@@ -13,7 +13,7 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Inschrijving_Cursus" Height="450" Width="800">
+        Title="Inschrijving_Cursus" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -30,8 +30,9 @@
     Inschrijven Cursus
         </TextBlock>
         <Label x:Name="lblCategorie" Margin="5" Grid.Column="0" Grid.Row="1" Content="Kies een categorie:" HorizontalAlignment="Center"/>
-        <ComboBox x:Name="cmbCategorie" Margin="5" Grid.Column="1" Grid.Row="1"/>
-        <ListBox x:Name="lbCategorien" Margin="5" Grid.ColumnSpan="2" Grid.Row="2"/>
+        <ComboBox x:Name="cmbCategorien" Margin="5" Grid.Column="1" Grid.Row="1" SelectionChanged="cmbCategorien_SelectionChanged" />
+        <ListBox x:Name="lbCursussen" Margin="5" Grid.ColumnSpan="2" Grid.Row="2"/>
         <Button x:Name="btnInschrijven" Margin="5" Grid.ColumnSpan="2" Grid.Row="3" Content="Inschrijven" Width="200"/>
+        <Label x:Name="lblTest" Grid.Column="0" Grid.Row="3"/>
     </Grid>
 </Window>

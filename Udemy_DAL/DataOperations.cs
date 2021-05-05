@@ -18,5 +18,25 @@ namespace Udemy_DAL
             }
         }
 
+        public static List<Cursus> OphalenCursussen()
+        {
+            using (UdemyEntities entities = new UdemyEntities())
+            {
+                var query = entities.Cursus.Include("Gebruikers").Include("Categorie");
+
+                return query.ToList();
+                    
+            }
+        }
+
+        public static List<Categorie> OphalenCategorien()
+        {
+            using (UdemyEntities entities = new UdemyEntities())
+            {
+                var query = entities.Categories;
+                return query.ToList();
+            }
+        }
+
     }
 }

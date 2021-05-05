@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Udemy_DAL;
 
 namespace SaracinoNick_TTI_DM_Project
 {
@@ -27,6 +28,33 @@ namespace SaracinoNick_TTI_DM_Project
 
         private void btnRegistreren_Click(object sender, RoutedEventArgs e)
         {
+            Window registeren = new Registratie();
+            registeren.Show();
+        }
+
+        Gebruiker g = null;
+
+        private void btnInloggen_Click(object sender, RoutedEventArgs e)
+        {
+
+
+            if (!string.IsNullOrWhiteSpace(txtGebruikersnaam.Text) && !string.IsNullOrWhiteSpace(txtWachtwoord.Password))
+            {
+                 g = DatabaseOperations.OphalenGebruiker(txtGebruikersnaam.Text, txtWachtwoord.Password);
+                if (g != null)
+                {
+                    Window hoofdscherm = new Hoofdscherm_Student(g);
+                    hoofdscherm.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("De gegevens zijn onjuist. Probeer het opnieuw.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Email en wachtwoord zijn verplicht in te vullen!");
+            }
 
         }
     }

@@ -132,6 +132,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Udemy_DAL\Udemy_DAL.csproj">
+      <Project>{4efa959b-2081-4f97-aecf-e019902e91cc}</Project>
+      <Name>Udemy_DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
