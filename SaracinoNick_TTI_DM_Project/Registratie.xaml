@@ -49,13 +49,13 @@
         <Label x:Name="lblHerhaal" Margin="5" Grid.Column="0" Grid.Row="6" Content="Herhaal wachtwoord" HorizontalAlignment="Center"  VerticalAlignment="Bottom"/>
         <PasswordBox x:Name="txtHerhaal" materialDesign:TextFieldAssist.HasClearButton="True" Grid.Row="6" Grid.Column="1" Margin="5"/>
         <Label x:Name="lblGeboortedatum" Margin="5" Grid.Column="0" Grid.Row="7" Content="Geboortedatum" HorizontalAlignment="Center"  VerticalAlignment="Bottom"/>
-        <DatePicker Grid.Row="7" Grid.Column="1"></DatePicker>
+        <DatePicker x:Name="dpGeboortedatum" Grid.Row="7" Grid.Column="1"></DatePicker>
         <Label x:Name="lblGeslacht" Margin="5" Grid.Column="0" Grid.Row="8" Content="Geslacht" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <RadioButton x:Name="rbMan" GroupName="geslacht" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center">Man</RadioButton>
         <RadioButton x:Name="rbVrouw" GroupName="geslacht" Grid.Row="8" Grid.Column="1" VerticalAlignment="Center" Margin="100 0 0 0">Vrouw</RadioButton>
         <Label x:Name="lblTypeGebruiker" Margin="5" Grid.Column="0" Grid.Row="9" Content="Type gebruiker" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
         <RadioButton x:Name="rbStudent" GroupName="typeGebruiker" Grid.Row="9" Grid.Column="1" VerticalAlignment="Center">Student</RadioButton>
         <RadioButton x:Name="rbInstructeur" GroupName="typeGebruiker" Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" Margin="100 0 0 0">Instructeur</RadioButton>
-        <Button x:Name="btnRegistreren" Content="Registreren" Grid.ColumnSpan="2" Grid.Row="10" Margin="5" Width="150"/>
+        <Button x:Name="btnRegistreren" Content="Registreren" Grid.ColumnSpan="2" Grid.Row="10" Margin="5" Width="150" Click="btnRegistreren_Click"/>
     </Grid>
 </Window>

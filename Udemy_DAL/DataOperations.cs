@@ -38,5 +38,40 @@ namespace Udemy_DAL
             }
         }
 
+        public static int ToevoegenGebruiker(Gebruiker gebruiker)
+        {
+            try
+            {
+                using (UdemyEntities entities = new UdemyEntities())
+                {
+                    entities.Gebruikers.Add(gebruiker);
+                    return entities.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                FileOperations.FoutLoggen(ex);
+                return 0;
+            }
+        }
+
+        public static int ToevoegenInstructeur(Instructeur instructeur)
+        {
+            try
+            {
+                using (UdemyEntities entities = new UdemyEntities())
+                {
+                    entities.Instructeurs.Add(instructeur);
+                    return entities.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                FileOperations.FoutLoggen(ex);
+                return 0;
+            }
+        }
+
     }
 }

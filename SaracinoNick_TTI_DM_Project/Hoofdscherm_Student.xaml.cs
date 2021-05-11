@@ -35,6 +35,7 @@ namespace SaracinoNick_TTI_DM_Project
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            //listbox invullen met cursussen van de ingelogde gebruiker
             List<Cursus> lijstCursussen = DatabaseOperations.OphalenCursussen();
             List<string> lijst = new List<string>();
             lbIngeschrevenCursussen.ItemsSource = lijst;
@@ -49,6 +50,11 @@ namespace SaracinoNick_TTI_DM_Project
                 }
             }
             lbIngeschrevenCursussen.Items.Refresh();
+
+            //combobox betalingsmethode invullen
+            string[] betalingsmethodes = { "VISA", "KBC", "Proximus", "MisterCash" };
+            cmbBetalingsmethode.ItemsSource = betalingsmethodes;
+
         }
     }
 }
