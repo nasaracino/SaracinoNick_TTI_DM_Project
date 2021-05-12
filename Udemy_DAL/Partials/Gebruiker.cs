@@ -38,10 +38,24 @@ namespace Udemy_DAL
                 }
                 if (columnNaam == nameof(geslacht) && string.IsNullOrWhiteSpace(geslacht))
                 {
-                    return "Geslacht moet ingevuld zijn!";
+                    return "Geslacht moet gekozen worden!";
                 }
                 return "";
             }
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Gebruiker gebruiker &&
+                   email == gebruiker.email;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -93531737;
+            hashCode = hashCode * -1521134295 + id.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(email);
+            return hashCode;
         }
     }
 }

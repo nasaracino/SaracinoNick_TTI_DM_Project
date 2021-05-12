@@ -38,9 +38,9 @@ namespace SaracinoNick_TTI_DM_Project
         {
 
 
-            if (!string.IsNullOrWhiteSpace(txtGebruikersnaam.Text) && !string.IsNullOrWhiteSpace(txtWachtwoord.Password))
+            if (!string.IsNullOrWhiteSpace(txtEmail.Text) && !string.IsNullOrWhiteSpace(txtWachtwoord.Password))
             {
-                 g = DatabaseOperations.OphalenGebruiker(txtGebruikersnaam.Text, txtWachtwoord.Password);
+                 g = DatabaseOperations.OphalenGebruiker(txtEmail.Text, txtWachtwoord.Password);
                 if (g != null)
                 {
                     Window hoofdscherm = new Hoofdscherm_Student(g);

@@ -18,6 +18,15 @@ namespace Udemy_DAL
             }
         }
 
+        public static List<Gebruiker> OphalenGebruikers()
+        {
+            using (UdemyEntities entities = new UdemyEntities())
+            {
+                var query = entities.Gebruikers;
+                return query.ToList();
+            }
+        }
+
         public static List<Cursus> OphalenCursussen()
         {
             using (UdemyEntities entities = new UdemyEntities())
