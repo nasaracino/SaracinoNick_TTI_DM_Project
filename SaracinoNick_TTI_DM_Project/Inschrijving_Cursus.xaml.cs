@@ -20,61 +20,68 @@ namespace SaracinoNick_TTI_DM_Project
     /// </summary>
     public partial class Inschrijving_Cursus : Window
     {
-        public Inschrijving_Cursus()
+        public delegate void DataChangedEventHandler(object sender, EventArgs e);
+
+        public event DataChangedEventHandler DataChanged;
+        public Inschrijving_Cursus(Gebruiker g)
         {
             InitializeComponent();
+            gebruiker = g;
+            
         }
-
+        Gebruiker gebruiker = null;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            List<string> categorien = new List<string>();
-            cmbCategorien.ItemsSource = categorien;
-            foreach (var item in DatabaseOperations.OphalenCategorien())
-            {
-                categorien.Add(item.categorie1);
-            }
+            //List<Cursus> cursussen = DatabaseOperations.OphalenCursussen();
+            List<Categorie> categorien = DatabaseOperations.OphalenCategorien();
+            cmbCategorien.ItemsSource = categorien;        
             cmbCategorien.Items.Refresh();
         }
 
         private void cmbCategorien_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<string> cursussen = new List<string>();
-            if ((string)cmbCategorien.SelectedValue == "Development")
-            {
-                foreach (var cursus in DatabaseOperations.OphalenCursussen())
-                {
-                    if (cursus.categorieId == 1)
-                    {
-                        cursussen.Add(cursus.omschrijving);
-                    }
-                }
-                lbCursussen.Items.Refresh();
-            }
-             if ((string)cmbCategorien.SelectedValue == "Business")
-            {
-                foreach (var cursus in DatabaseOperations.OphalenCursussen())
-                {
-                    if (cursus.categorieId == 2)
-                    {
-                        cursussen.Add(cursus.omschrijving);
-
-                    }
-                }
-                lbCursussen.Items.Refresh();
-            }
-             if ((string)cmbCategorien.SelectedValue == "Finance & Accounting")
-            {
-                foreach (var cursus in DatabaseOperations.OphalenCursussen())
-                {
-                    if (cursus.categorieId == 3)
-                    {
-                        cursussen.Add(cursus.omschrijving);
-                    }
-                }
-                lbCursussen.Items.Refresh();
-            }
+            Categorie categorie = cmbCategorien.SelectedItem as Categorie;
+            List<Cursus> cursussen = DatabaseOperations.OphalenCursussenPerCategorie(categorie);
             lbCursussen.ItemsSource = cursussen;
             lbCursussen.Items.Refresh();
+        }
+
+        private void btnInschrijven_Click(object sender, RoutedEventArgs e)
+        {
+            List<Cursus> lijst = DatabaseOperations.OphalenCursussenGebruiker(gebruiker);
+            string foutmeldingen = Valideer("selectieCursus");
+            if (string.IsNullOrWhiteSpace(foutmeldingen))
+            {
+                Cursus cursus = lbCursussen.SelectedItem as Cursus;
+                if (!lijst.Contains(cursus))
+                {
+                    DatabaseOperations.ToevoegenCursusAanGebruiker(cursus, gebruiker);
+                    MessageBox.Show("U bent succesvol ingechreven!");
+                    DataChangedEventHandler handler = DataChanged;
+
+                    if (handler != null)
+                    {
+                        handler(this, new EventArgs());
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("U heeft al bij deze cursus ingeschreven!");
+                }
+            }
+            else
+            {
+                MessageBox.Show(foutmeldingen);
+            }
+        }
+
+        public string Valideer(string columnNaam)
+        {
+            if (columnNaam == "selectieCursus" && lbCursussen.SelectedItem == null)
+            {
+                return "Selecteer een cursus!";
+            }
+            return "";
         }
     }
 }

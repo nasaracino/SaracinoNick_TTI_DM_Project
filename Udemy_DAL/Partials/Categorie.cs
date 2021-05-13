@@ -23,5 +23,10 @@ namespace Udemy_DAL
                 return "";
             }
         }
+
+        public override string ToString()
+        {
+            return categorie1;
+        }
     }
 }

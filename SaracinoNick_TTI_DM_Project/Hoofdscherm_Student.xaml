@@ -13,20 +13,21 @@
         TextOptions.TextRenderingMode="Auto"        
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="Hoofdscherm_Student" Height="450" Width="900" Loaded="Window_Loaded">
+        Title="Hoofdscherm_Student" Height="500" Width="900" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="150"/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Grid.ColumnSpan="3" TextAlignment="Center" Margin="5"
     Style="{StaticResource MaterialDesignHeadline4TextBlock}">
@@ -41,15 +42,20 @@
   Ik wil me inschrijven voor een cursus
         </TextBlock>
         <ListBox x:Name="lbIngeschrevenCursussen" Grid.Row="2" Grid.Column="0" Margin="5"></ListBox>
-        <Button x:Name="btnInschrijvenCursus" Grid.Row="2" Grid.Column="2" Margin="65.411,59,98,59" Content="Klik hier" Width="200" Click="btnInschrijvenCursus_Click" />
-        <Button x:Name="btnCursusBekijken" Grid.Row="3" Grid.Column="0" Margin="98,9,98,8" Content="Cursus Bekijken" Width="200"/>
-        <TextBlock Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" Margin="75,20,74,0"
+        <Button x:Name="btnInschrijvenCursus" Grid.Row="2" Grid.Column="2" Margin="65.411,59,98,59" Content="Klik hier" Width="200" Click="btnInschrijvenCursus_Click"/>
+        <Label x:Name="lblEmail" Grid.Row="3" Grid.Column="0" Margin="5" Content="Email:" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <TextBox x:Name="txtEmail" Grid.Row="3" Grid.Column="1" Margin="5"/>
+        <Label x:Name="lblWachtwoord" Grid.Row="4" Grid.Column="0" Margin="5" Content="Wachtwoord:" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+        <PasswordBox x:Name="txtWachtwoord" Grid.Row="4" Grid.Column="1" Margin="5"/>
+        <TextBlock Grid.Row="5" Grid.Column="0" HorizontalAlignment="Center" Margin="75,20,74,0"
     Style="{StaticResource MaterialDesignHeadline6TextBlock}">
   Betalingsmethode instellen
         </TextBlock>
-        <Label x:Name="lblBetalingsmethode" Content="Betalingsmethode:" Grid.Column="0" Grid.Row="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="140,13,140,12"/>
-        <ComboBox x:Name="cmbBetalingsmethode" Grid.Column="1" Grid.Row="5" Margin="5,5,5,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        <Button x:Name="btnInstellen" Grid.Column="0" Grid.Row="6" Margin="86,8,86,9" Content="Betalingsmethode instellen" Width="225"/>
-        <Label x:Name="lblTest" Grid.Column="1" Grid.Row="6" Content="TEST"/>
+        <Button x:Name="btnEmailAanpassen" Grid.Row="5" Grid.Column="1" Content="Email Aanpassen" Margin="5" HorizontalAlignment="Left" Width="200" Click="btnEmailAanpassen_Click"/>
+        <Button x:Name="btnWachtwoordAanpassen" Grid.Row="5" Grid.Column="1" Content="Wachtwoord Aanpassen" Margin="5" HorizontalAlignment="Right" Width="200" Click="btnWachtwoordAanpassen_Click"/>
+        <Label x:Name="lblBetalingsmethode" Content="Betalingsmethode:" Grid.Column="0" Grid.Row="6" Margin="140,13,140,12"/>
+        <ComboBox x:Name="cmbBetalingsmethode" Grid.Column="1" Grid.Row="6" Margin="5,5,5,0" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnInstellen" Grid.Column="0" Grid.Row="7" Margin="86,8,86,9" Content="Betalingsmethode instellen" Width="225" Click="btnInstellen_Click"/>
+        <Label x:Name="lblHuidigeBM" Grid.Column="1" Grid.Row="7"/>
     </Grid>
 </Window>

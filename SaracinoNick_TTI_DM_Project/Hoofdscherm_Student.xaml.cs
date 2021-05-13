@@ -29,32 +29,84 @@ namespace SaracinoNick_TTI_DM_Project
         Gebruiker gebruiker = null;
         private void btnInschrijvenCursus_Click(object sender, RoutedEventArgs e)
         {
-            Window inschrijven = new Inschrijving_Cursus();
+            //ingelogde gebruiker doorgeven aan Inschrijven_Cursus window
+            Inschrijving_Cursus inschrijven = new Inschrijving_Cursus(gebruiker);
+            //Zorgt dat als Inschrijven_Cursus gesloten wordt, wordt lbIngeschrevenCursussen geupdate
+            inschrijven.DataChanged += Inschrijven_Cursus_DataChanged;
             inschrijven.Show();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //listbox invullen met cursussen van de ingelogde gebruiker
-            List<Cursus> lijstCursussen = DatabaseOperations.OphalenCursussen();
-            List<string> lijst = new List<string>();
-            lbIngeschrevenCursussen.ItemsSource = lijst;
-            foreach (var cursus in lijstCursussen)
-            {
-                foreach (var item in cursus.Gebruikers)
-                {
-                    if (gebruiker.id == item.id)
-                    {
-                        lijst.Add(cursus.omschrijving);
-                    }
-                }
-            }
+            List<Cursus> lijstCursussen = DatabaseOperations.OphalenCursussenGebruiker(gebruiker);
+            lbIngeschrevenCursussen.ItemsSource = lijstCursussen;
             lbIngeschrevenCursussen.Items.Refresh();
+            lblHuidigeBM.Content = "Huidige betalingsmethode is: " + gebruiker.betalingsmethode;
+            txtEmail.Text = gebruiker.email;
 
             //combobox betalingsmethode invullen
-            string[] betalingsmethodes = { "VISA", "KBC", "Proximus", "MisterCash" };
+            string[] betalingsmethodes = { "VISA", "KBC", "Proximus", "MisterCash", "PayPal" };
             cmbBetalingsmethode.ItemsSource = betalingsmethodes;
 
+        }
+
+        private void Inschrijven_Cursus_DataChanged(object sender, EventArgs e)
+        {
+            //Zorgt dat als Inschrijven_Cursus gesloten wordt, wordt lbIngeschrevenCursussen geupdate
+            List<Cursus> lijstCursussen = DatabaseOperations.OphalenCursussenGebruiker(gebruiker);
+            lbIngeschrevenCursussen.ItemsSource = lijstCursussen;
+            lbIngeschrevenCursussen.Items.Refresh();
+        }
+
+        private string Valideer(string columnNaam)
+        {
+            if (columnNaam == "betalingsmethode" && cmbBetalingsmethode.SelectedItem == null)
+            {
+                return "Je moet een betalingsmethode kiezen!";
+            }
+            return "";
+        }
+
+        private void btnInstellen_Click(object sender, RoutedEventArgs e)
+        {
+            string foutmeldingen = Valideer("betalingsmethode");
+            string nieuweBM = cmbBetalingsmethode.SelectedItem as string;
+            if (string.IsNullOrWhiteSpace(foutmeldingen))
+            {
+                DatabaseOperations.AanpassenBetalingsmethode(gebruiker, nieuweBM);
+                lblHuidigeBM.Content = "Huidige betalingsmethode is: " + nieuweBM;
+                MessageBox.Show("Je hebt je betalingsmethode succesvol aangepast!");
+            }
+            else
+            {
+                MessageBox.Show(foutmeldingen);
+            }
+
+        }
+        private void btnEmailAanpassen_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtEmail.Text))
+            {
+                DatabaseOperations.AanpassenEmail(gebruiker, txtEmail.Text);
+                MessageBox.Show("Je hebt je email succesvol aangepast!");
+            }
+            else
+            {
+                MessageBox.Show("Vul je nieuwe email in!");
+            }
+        }
+
+        private void btnWachtwoordAanpassen_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtWachtwoord.Password))
+            {
+                DatabaseOperations.AanpassenWachtwoord(gebruiker, txtWachtwoord.Password);
+                MessageBox.Show("Je hebt je wachtwoord succesvol aangepast!");
+            }
+            else
+            {
+                MessageBox.Show("Vul je nieuwe wachtwoord in!");
+            }
         }
     }
 }

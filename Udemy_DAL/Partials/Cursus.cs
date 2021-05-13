@@ -55,5 +55,23 @@ namespace Udemy_DAL
                 return "";
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Cursus cursus &&
+                   omschrijving == cursus.omschrijving;
+        }
+
+        public override int GetHashCode()
+        {
+            return -1888767732 + EqualityComparer<string>.Default.GetHashCode(omschrijving);
+        }
+
+        public override string ToString()
+        {
+            return omschrijving;
+        }
+
+
     }
 }

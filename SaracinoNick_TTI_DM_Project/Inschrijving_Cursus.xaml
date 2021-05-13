@@ -32,7 +32,7 @@
         <Label x:Name="lblCategorie" Margin="5" Grid.Column="0" Grid.Row="1" Content="Kies een categorie:" HorizontalAlignment="Center"/>
         <ComboBox x:Name="cmbCategorien" Margin="5" Grid.Column="1" Grid.Row="1" SelectionChanged="cmbCategorien_SelectionChanged" />
         <ListBox x:Name="lbCursussen" Margin="5" Grid.ColumnSpan="2" Grid.Row="2"/>
-        <Button x:Name="btnInschrijven" Margin="5" Grid.ColumnSpan="2" Grid.Row="3" Content="Inschrijven" Width="200"/>
+        <Button x:Name="btnInschrijven" Margin="5" Grid.ColumnSpan="2" Grid.Row="3" Content="Inschrijven" Width="200" Click="btnInschrijven_Click"/>
         <Label x:Name="lblTest" Grid.Column="0" Grid.Row="3"/>
     </Grid>
 </Window>

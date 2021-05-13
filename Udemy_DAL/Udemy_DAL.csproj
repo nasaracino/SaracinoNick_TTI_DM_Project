@@ -57,7 +57,7 @@
     <Compile Include="Cursus.cs">
       <DependentUpon>UdemyModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="DataOperations.cs" />
+    <Compile Include="DatabaseOperations.cs" />
     <Compile Include="FileOperations.cs" />
     <Compile Include="Gebruiker.cs">
       <DependentUpon>UdemyModel.tt</DependentUpon>
